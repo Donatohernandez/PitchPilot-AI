@@ -6,8 +6,6 @@
 </p>
 
 <p align="center">
-  <a href="https://pitchpilot-ai.vercel.app">Probar PitchPilot AI</a>
-  ·
   <a href="https://donatohernandez.dev">Portafolio</a>
 </p>
 
