@@ -1,18 +1,12 @@
 # PitchPilot AI — Practica tu pitch con una audiencia de IA
 
 <p align="center">
-  <img src="assets/portada.webp" alt="Portada de PitchPilot AI" width="900" />
-</p>
-
-<p align="center">
   <strong>Simulador de pitches por voz con inteligencia artificial en tiempo real.</strong><br />
   Habla. Responde. Recibe retroalimentación. Mejora.
 </p>
 
 <p align="center">
   <a href="https://pitchpilot-ai.vercel.app">Probar PitchPilot AI</a>
-  ·
-  <a href="https://docs.google.com/presentation/d/1UA-BsTq49MPvTfVKOFV1DusC42-MNQJOJXiROLKEzfY/edit?usp=sharing">Ver presentación</a>
   ·
   <a href="https://donatohernandez.dev">Portafolio</a>
 </p>
@@ -53,26 +47,33 @@ PitchPilot AI combina una simulación conversacional y un reporte posterior a la
 4. **Coaching:** el agente abandona el personaje y ofrece retroalimentación oral.
 5. **Reporte:** se genera un análisis con métricas, fortalezas y acciones de mejora.
 
-<p align="center">
-  <img src="assets/flujo-producto.webp" alt="Flujo de cuatro etapas de PitchPilot AI" width="900" />
-</p>
-
 ## El producto en funcionamiento
 
 ### Simulación en vivo
 
 Durante la sesión, la aplicación transmite la voz del usuario y reproduce las respuestas de la IA. De forma opcional, también analiza localmente la atención visual para detectar contacto con la cámara y periodos de distracción.
 
-<p align="center">
-  <img src="assets/simulacion-en-vivo.webp" alt="Simulación en vivo y detección de atención visual en PitchPilot AI" width="900" />
-</p>
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="assets/simulacion-enfocado.webp" alt="PitchPilot AI detectando contacto visual durante una simulación" />
+    </td>
+    <td width="50%" align="center">
+      <img src="assets/simulacion-distraccion.webp" alt="PitchPilot AI detectando una distracción durante una simulación" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Contacto visual detectado</strong></td>
+    <td align="center"><strong>Distracción detectada</strong></td>
+  </tr>
+</table>
 
 ### Reporte accionable
 
 Al terminar, el sistema convierte la conversación en un reporte estructurado. No se limita a mostrar un puntaje: identifica qué funcionó, qué debe mejorar y qué acciones puede practicar el usuario antes de su siguiente presentación.
 
 <p align="center">
-  <img src="assets/reporte-generado.webp" alt="Reporte de desempeño y puntos de acción generado por PitchPilot AI" width="900" />
+  <img src="assets/reporte-completo.webp" alt="Reporte completo de desempeño y puntos de acción generado por PitchPilot AI" width="620" />
 </p>
 
 ## Funcionalidades principales
@@ -285,16 +286,6 @@ Configuré Cloud Run para aceptar conexiones largas, mantener instancias disponi
 - Generé reportes posteriores a cada sesión con recomendaciones y planes de acción.
 - Desplegué el frontend en Vercel y el backend WebSocket en Google Cloud Run.
 - Construí una experiencia bilingüe con preguntas adaptadas a diferentes audiencias.
-
-La presentación del proyecto resume además los siguientes resultados de validación:
-
-- **9 de cada 10** usuarios indicaron que lo utilizarían de forma recurrente.
-- **8 de cada 10** reportaron menor ansiedad después de su segunda práctica.
-- **10 de 10** expresaron alta satisfacción con el Q&A personalizado.
-
-<p align="center">
-  <img src="assets/resultados-usuarios.webp" alt="Resultados de validación de PitchPilot AI con usuarios" width="900" />
-</p>
 
 ## Alcance actual
 
