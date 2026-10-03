@@ -1,129 +1,333 @@
-# PitchPilot AI – Real-Time Voice Pitch Practice Platform
+# PitchPilot AI — Practica tu pitch con una audiencia de IA
 
-## Overview
+<p align="center">
+  <img src="assets/portada.webp" alt="Portada de PitchPilot AI" width="900" />
+</p>
 
-PitchPilot AI is an interactive voice coaching platform that helps users improve their public speaking and pitch delivery through real-time AI feedback. Built with cutting-edge voice AI technology, it provides instant coaching, performance analysis, and actionable insights to help speakers gain confidence and polish their delivery.
+<p align="center">
+  <strong>Simulador de pitches por voz con inteligencia artificial en tiempo real.</strong><br />
+  Habla. Responde. Recibe retroalimentación. Mejora.
+</p>
 
-Built for the **Google Gemini Live Agent Challenge (March 2026)**, PitchPilot AI evolved into a full product demonstrating real-time voice AI capabilities and interactive coaching.
-
----
-
-## My Role
-
-**Co-Founder & Lead Full-Stack Developer**
-
-I architected and built PitchPilot AI across the entire stack, handling complex real-time voice processing, AI integration, and infrastructure challenges:
-
-- Full-stack development (frontend, backend, voice processing)
-- Real-time voice interaction architecture with WebSockets
-- AI integration with Google Gemini Live API
-- Backend infrastructure with Node.js and Google Cloud Run
-- Voice Activity Detection (VAD) optimization and configuration
-- Docker containerization and cross-platform deployment
-- Phase management and state synchronization
-- Production deployment and scaling
-
-**Co-Founder:** [Gaby Estrella](https://github.com/gabyestrella) – Collaborator on core architecture and feature implementation
+<p align="center">
+  <a href="https://pitchpilot-ai.vercel.app">Probar PitchPilot AI</a>
+  ·
+  <a href="https://docs.google.com/presentation/d/1UA-BsTq49MPvTfVKOFV1DusC42-MNQJOJXiROLKEzfY/edit?usp=sharing">Ver presentación</a>
+  ·
+  <a href="https://donatohernandez.dev">Portafolio</a>
+</p>
 
 ---
 
-## Key Features
+## Sobre este repositorio
 
-**Real-Time Voice Interaction**
-- Live voice streaming with bidirectional WebSocket communication
-- Sub-100ms latency for responsive coaching
-- Seamless audio input/output handling
+Este repositorio documenta **PitchPilot AI** como caso de estudio técnico y de producto. Su propósito es explicar el problema, la experiencia de usuario, la arquitectura de tiempo real y las decisiones de ingeniería detrás de la solución.
 
-**AI-Powered Coaching**
-- Google Gemini Live API integration for intelligent feedback
-- Real-time coaching based on speech patterns and delivery
-- Performance insights and improvement suggestions
-- Custom voice personality ("Charon") for consistent coaching tone
+El código de producción se mantiene en un repositorio privado. Este repositorio no contiene credenciales, variables de entorno, transcripciones de usuarios ni información sensible.
 
-**Voice Activity Detection (VAD)**
-- Intelligent silence detection with optimized sensitivity settings
-- Automatic phrase detection and processing
-- Configurable silence duration thresholds
-- Reduces latency and improves user experience
+## Resumen
 
-**Performance Feedback**
-- Real-time analysis of pitch, pacing, and clarity
-- Immediate coaching suggestions during practice
-- Cumulative feedback and progress tracking
-- Personalized recommendations for improvement
+PitchPilot AI permite practicar una presentación frente a una audiencia simulada por IA. El usuario configura el idioma, el tipo de audiencia y el contexto; después presenta su pitch, responde preguntas personalizadas y recibe coaching junto con un reporte accionable.
 
-**Session Management**
-- Phase-based workflow (introduction, practice, feedback)
-- State synchronization across components
-- Connection reliability with automatic reconnection handling
-- GoAway protocol handling for stable sessions
+La experiencia completa sucede mediante voz bidireccional en tiempo real con **Gemini Live API**. El sistema coordina cada sesión como una secuencia de fases, transmite audio mediante WebSockets y genera al final un análisis escrito con puntuación, métricas, fortalezas y próximos pasos.
 
----
+## El problema
 
-## Tech Stack
+Practicar una presentación sin interlocutor no reproduce la presión, las preguntas ni la incertidumbre de una sesión real. Al mismo tiempo, contratar un coach puede ser costoso o no estar disponible cuando la persona necesita prepararse.
 
-**Frontend:**
-- React 18
-- TypeScript
-- Real-time audio streaming
-- WebSocket client integration
+Las principales fricciones identificadas fueron:
 
-**Backend:**
-- Node.js + Express
-- TypeScript
-- Custom WebSocket proxy architecture
-- Google Cloud Run for serverless deployment
+- La práctica individual no ofrece preguntas inesperadas ni objeciones reales.
+- La retroalimentación suele llegar tarde o depender de otra persona.
+- Cada audiencia evalúa aspectos distintos de un pitch.
+- Los usuarios necesitan orientación concreta, no solamente una calificación.
+- La ansiedad aumenta cuando no existe una forma accesible de ensayar varias veces.
 
-**AI & APIs:**
-- Google Gemini Live API (model: gemini-2.5-flash-native-audio-preview-12-2025)
-- Real-time voice streaming
-- Custom voice personality configuration
+## La solución
 
-**Infrastructure:**
-- Google Cloud Run for scalable backend
-- Vercel for frontend deployment
-- Docker containerization with cross-platform support (Apple Silicon compatibility)
-- WebSocket proxy for bidirectional communication
+PitchPilot AI combina una simulación conversacional y un reporte posterior a la sesión:
 
-**Voice Processing:**
-- Web Audio API for client-side audio capture
-- VAD (Voice Activity Detection) optimization
-- Audio codec handling and streaming
+1. **Onboarding:** el usuario elige idioma, audiencia, contexto y número de preguntas.
+2. **Pitch:** dispone de 45 segundos para presentar su idea o desarrollo.
+3. **Q&A:** la IA adopta el rol seleccionado y realiza preguntas personalizadas.
+4. **Coaching:** el agente abandona el personaje y ofrece retroalimentación oral.
+5. **Reporte:** se genera un análisis con métricas, fortalezas y acciones de mejora.
 
----
+<p align="center">
+  <img src="assets/flujo-producto.webp" alt="Flujo de cuatro etapas de PitchPilot AI" width="900" />
+</p>
 
-## Development Highlights
+## El producto en funcionamiento
 
-✅ **Real-Time Architecture** – Designed WebSocket proxy system for reliable voice streaming  
-✅ **GoAway Reconnection Handling** – Solved connection stability challenges  
-✅ **VAD Optimization** – Fine-tuned voice detection for natural conversation flow  
-✅ **Cross-Platform Deployment** – Docker Apple Silicon support for seamless development  
-✅ **Production-Ready** – Deployed and tested with real users  
-✅ **AI Integration** – Seamless Gemini Live API integration for intelligent coaching  
-✅ **Infrastructure as Code** – Cloud Run setup for scalable, serverless operation  
+### Simulación en vivo
 
----
+Durante la sesión, la aplicación transmite la voz del usuario y reproduce las respuestas de la IA. De forma opcional, también analiza localmente la atención visual para detectar contacto con la cámara y periodos de distracción.
 
-## Technical Challenges Solved
+<p align="center">
+  <img src="assets/simulacion-en-vivo.webp" alt="Simulación en vivo y detección de atención visual en PitchPilot AI" width="900" />
+</p>
 
-- **Reconnection Logic:** Implemented robust GoAway protocol handling for stable WebSocket connections
-- **Latency Optimization:** Achieved sub-100ms response times for real-time coaching
-- **Voice Detection:** Tuned VAD configuration (`END_SENSITIVITY_HIGH`, `silenceDurationMs: 500`) for natural interactions
-- **Cross-Compilation:** Built Docker images for Apple Silicon development environment
-- **State Management:** Implemented phase-based state synchronization for reliable sessions
+### Reporte accionable
 
----
+Al terminar, el sistema convierte la conversación en un reporte estructurado. No se limita a mostrar un puntaje: identifica qué funcionó, qué debe mejorar y qué acciones puede practicar el usuario antes de su siguiente presentación.
 
-## Repository
+<p align="center">
+  <img src="assets/reporte-generado.webp" alt="Reporte de desempeño y puntos de acción generado por PitchPilot AI" width="900" />
+</p>
 
-The complete source code is maintained privately in the [zaaby-app organization](https://github.com/zaaby-app).  
-Feel free to reach out to discuss the real-time voice architecture, WebSocket implementation, or any technical aspects of the project.
+## Funcionalidades principales
 
----
+| Funcionalidad | Descripción |
+|---|---|
+| **Conversación por voz en tiempo real** | Audio bidireccional entre el navegador y Gemini Live mediante WebSockets. |
+| **Audiencias configurables** | Simula inversionistas, jueces, profesores, clientes u otros perfiles. |
+| **Sesiones bilingües** | Experiencia y prompts disponibles en español e inglés. |
+| **Pitch cronometrado** | Controla una presentación de 45 segundos y continúa al Q&A de forma guiada. |
+| **Preguntas dinámicas** | Genera preguntas a partir del contenido del pitch y del tipo de audiencia. |
+| **Coaching conversacional** | Cambia de audiencia a coach y ofrece retroalimentación oral contextual. |
+| **Reporte con IA** | Produce score, resumen, fortalezas, métricas y áreas de mejora. |
+| **Análisis de voz** | Incluye estimaciones de claridad, energía, ritmo, palabras por minuto y muletillas. |
+| **Análisis de presencia** | Detecta contacto visual y distracciones localmente con MediaPipe FaceMesh. |
+| **Exportación a PDF** | Permite descargar el reporte generado al finalizar la sesión. |
+| **Compartir pantalla** | Envía contexto visual opcional para enriquecer la simulación. |
+| **Reconexión automática** | Recupera sesiones ante cierres programados de Gemini Live. |
 
-## Connect
+## Mi rol
 
-- **Portfolio:** [donatohernadnez.dev](https://donatohernandez.dev) *(coming soon)*
-- **Email:** manueldonato9921@gmail.com
+### Cofundador · Full-Stack Developer · Backend Engineer
+
+Diseñé y desarrollé el sistema de extremo a extremo, con especial atención a la transmisión de voz, la orquestación de sesiones y la infraestructura en la nube.
+
+### Backend y comunicación en tiempo real
+
+- Construí el backend con Node.js, TypeScript, Express y `ws`.
+- Diseñé un proxy WebSocket entre el navegador y Gemini Live API.
+- Implementé streaming de audio bidireccional y transcripción de entrada y salida.
+- Organicé la lógica de negocio como una máquina de estados por conexión.
+- Añadí reconexión proactiva ante eventos `goAway` de Gemini.
+- Conservé contexto reciente para reanudar conversaciones sin reiniciar la sesión.
+- Implementé reintentos y fallbacks para la generación del reporte.
+
+### Inteligencia artificial y diseño de conversación
+
+- Integré Gemini Live para la conversación de voz y Gemini 2.5 Flash para el reporte.
+- Diseñé prompts bilingües para los modos audiencia y coach.
+- Definí eventos de sistema que coordinan pitch, preguntas, coaching y cierre.
+- Construí el contrato JSON del reporte y su normalización para el frontend.
+- Incorporé instrucciones para adaptar las preguntas al contexto y audiencia elegidos.
+- Evité exponer la clave de Gemini en el navegador mediante el proxy de servidor.
+
+### Frontend y procesamiento multimedia
+
+- Implementé la experiencia en React con captura y reproducción de audio mediante Web Audio API.
+- Construí temporizadores, controles de sesión, estados de conexión y visualización de fases.
+- Integré cámara, pantalla compartida y MediaPipe FaceMesh.
+- Desarrollé el reporte visual y su exportación a PDF con `html2canvas` y `jsPDF`.
+- Implementé la interfaz bilingüe y los estados de error, reconexión y generación.
+
+### Infraestructura y despliegue
+
+- Contenericé el backend con Docker.
+- Resolví compatibilidad entre desarrollo en Apple Silicon y despliegue `linux/amd64`.
+- Desplegué el backend en Google Cloud Run y el frontend en Vercel.
+- Configuré timeouts extendidos para sesiones WebSocket y escalamiento del servicio.
+- Probé sesiones completas con usuarios y ajusté la experiencia con base en resultados reales.
+
+## Arquitectura
+
+```mermaid
+flowchart LR
+    subgraph Browser[Navegador]
+        UI[React UI]
+        AUDIO[Web Audio API]
+        FACE[MediaPipe FaceMesh]
+        SCREEN[Captura de pantalla opcional]
+    end
+
+    subgraph Cloud[Backend en Google Cloud Run]
+        HTTP[Express / Health]
+        PROXY[WebSocket Proxy]
+        STATE[Máquina de estados]
+        REPORT[Generador de reporte]
+    end
+
+    subgraph Gemini[Google Gemini]
+        LIVE[Gemini Live API]
+        TEXT[Gemini 2.5 Flash]
+    end
+
+    UI --> AUDIO
+    UI --> FACE
+    UI --> SCREEN
+    AUDIO <-->|PCM + transcripciones| PROXY
+    SCREEN --> PROXY
+    PROXY --> STATE
+    PROXY <-->|Audio bidireccional| LIVE
+    STATE --> REPORT
+    REPORT --> TEXT
+    TEXT -->|Reporte JSON| UI
+```
+
+## Flujo de una sesión
+
+```mermaid
+sequenceDiagram
+    participant U as Usuario
+    participant F as Frontend
+    participant B as Backend WS
+    participant G as Gemini Live
+    participant R as Gemini Report
+
+    U->>F: Selecciona idioma y audiencia
+    F->>B: init
+    B->>G: Configuración y prompt
+    G-->>U: Presentación del agente
+    U->>G: Pitch por voz
+    B->>B: Control de tiempo y fases
+    G-->>U: Preguntas personalizadas
+    U->>G: Respuestas
+    G-->>U: Coaching oral
+    F->>B: Finalizar sesión
+    B->>R: Transcripción estructurada
+    R-->>F: Reporte JSON
+    F-->>U: Métricas y acciones de mejora
+```
+
+## Máquina de estados
+
+El backend mantiene una máquina de estados independiente para cada conexión:
+
+```text
+ONBOARDING
+    ↓ confirmación de audiencia y contexto
+PITCH
+    ↓ fin del temporizador
+PITCH_ENDING
+    ↓ recapitulación y primera pregunta
+Q&A
+    ↓ respuestas completadas o salto manual
+POST_SIM
+    ↓ transición a coach
+REPORT
+```
+
+Los cambios de fase utilizan eventos explícitos y banderas de protección para evitar transiciones duplicadas, especialmente durante reconexiones o repeticiones de mensajes.
+
+## Stack tecnológico
+
+| Capa | Tecnologías |
+|---|---|
+| **Frontend** | React 18, JavaScript, Tailwind CSS |
+| **Audio** | Web Audio API, PCM 16 kHz de entrada y 24 kHz de salida |
+| **Comunicación** | WebSockets con `ws` |
+| **Backend** | Node.js, Express, TypeScript |
+| **IA conversacional** | Gemini Live API, audio nativo en tiempo real |
+| **Reporte** | Gemini 2.5 Flash, respuesta JSON estructurada |
+| **Visión local** | MediaPipe FaceMesh |
+| **PDF** | html2canvas, jsPDF |
+| **Contenedores** | Docker, Buildx |
+| **Backend hosting** | Google Cloud Run |
+| **Frontend hosting** | Vercel |
+
+## Decisiones técnicas destacadas
+
+### Proxy WebSocket en el backend
+
+El navegador no se conecta directamente con Gemini. El proxy protege credenciales, controla el ciclo de la sesión y traduce eventos entre el cliente y el proveedor de IA.
+
+### Estado aislado por conexión
+
+Cada WebSocket mantiene sus propios contadores, transcript, fase y banderas. Esto evita mezclar sesiones y permite coordinar el flujo sin depender de estado global.
+
+### Reconexión antes de la interrupción
+
+Gemini Live puede enviar un evento `goAway` antes de cerrar la conexión. Implementé una reconexión proactiva que crea el nuevo canal y recupera contexto reciente para reducir interrupciones perceptibles.
+
+### Audio suprimido durante el pitch
+
+Mientras el usuario presenta, el audio de la IA se descarta para evitar interrupciones. La transición al Q&A ocurre cuando termina el tiempo o el usuario indica que concluyó.
+
+### Separación entre conversación y reporte
+
+Gemini Live conduce la sesión; un modelo de texto separado recibe la transcripción y genera el reporte final. Esta separación permite respuestas de voz fluidas y una salida escrita estructurada.
+
+### Análisis facial local
+
+La cámara se procesa en el navegador con MediaPipe. Las métricas de contacto visual pueden incorporarse al reporte sin enviar continuamente el video completo al backend.
+
+## Retos técnicos resueltos
+
+### Latencia conversacional
+
+Optimicé la detección de voz, el tamaño de los fragmentos de audio y la reproducción programada para reducir aproximadamente **35 % la latencia percibida entre turnos**.
+
+### Estabilidad de sesiones largas
+
+La duración de una sesión podía superar la vida de una conexión de Gemini Live. La reconexión con contexto y las banderas de fase evitaron reinicios o preguntas repetidas.
+
+### Coordinación entre IA e interfaz
+
+El agente necesitaba controlar la experiencia sin depender de botones para cada transición. Los eventos de sistema y las frases de control sincronizan el comportamiento del modelo con temporizadores, indicadores y reportes.
+
+### Audio en distintos entornos
+
+Fue necesario manejar frecuencias de muestreo, conversión PCM, estados suspendidos de `AudioContext`, permisos del navegador y reproducción sin solapamientos.
+
+### Despliegue de WebSockets
+
+Configuré Cloud Run para aceptar conexiones largas, mantener instancias disponibles y ejecutar imágenes construidas para la arquitectura del entorno de producción.
+
+## Resultados tangibles
+
+- Implementé el flujo completo: onboarding, pitch, Q&A, coaching y reporte.
+- Reduje aproximadamente **35 %** la latencia percibida entre turnos.
+- Reduje las interrupciones de sesión de **cuatro a cero** durante dos días de pruebas con **60 usuarios**.
+- Generé reportes posteriores a cada sesión con recomendaciones y planes de acción.
+- Desplegué el frontend en Vercel y el backend WebSocket en Google Cloud Run.
+- Construí una experiencia bilingüe con preguntas adaptadas a diferentes audiencias.
+
+La presentación del proyecto resume además los siguientes resultados de validación:
+
+- **9 de cada 10** usuarios indicaron que lo utilizarían de forma recurrente.
+- **8 de cada 10** reportaron menor ansiedad después de su segunda práctica.
+- **10 de 10** expresaron alta satisfacción con el Q&A personalizado.
+
+<p align="center">
+  <img src="assets/resultados-usuarios.webp" alt="Resultados de validación de PitchPilot AI con usuarios" width="900" />
+</p>
+
+## Alcance actual
+
+PitchPilot AI es un **proyecto funcional terminado y desplegado**. El flujo principal está completo, pero actualmente funciona como una experiencia de práctica sin cuentas ni historial persistente; las sesiones y reportes viven temporalmente durante el uso.
+
+Para evolucionarlo hacia una plataforma comercial completa, las siguientes etapas serían:
+
+- Autenticación y perfiles de usuario.
+- Historial persistente de sesiones y reportes.
+- Límites de uso, control de costos y protección contra abuso.
+- Pruebas automatizadas de estados, reconexión y generación de reportes.
+- Observabilidad, métricas operativas y alertas.
+- Migración del procesamiento de audio a AudioWorklet.
+
+## Equipo
+
+| Integrante | Rol | Enlaces |
+|---|---|---|
+| **Donato Hernández** | Cofundador · Full-Stack Developer · Backend Engineer | [LinkedIn](https://www.linkedin.com/in/manuel-donato-hernandez/) · [GitHub](https://github.com/Donatohernandez) |
+| **Gabriela Estrella** | Cofundadora · Colaboración en arquitectura y experiencia | [LinkedIn](https://www.linkedin.com/in/gaby-estrella-/) · [GitHub](https://github.com/gabyestrella) |
+
+## Contacto
+
+Si deseas conocer más sobre la arquitectura de voz, la integración con Gemini Live o las decisiones técnicas del proyecto:
+
+- **Portafolio:** [donatohernandez.dev](https://donatohernandez.dev)
 - **LinkedIn:** [manuel-donato-hernandez](https://www.linkedin.com/in/manuel-donato-hernandez/)
-- **GitHub:** [@donatohernandez](https://github.com/Donatohernandez)
+- **GitHub:** [@Donatohernandez](https://github.com/Donatohernandez)
+- **Correo:** [manueldonato9921@gmail.com](mailto:manueldonato9921@gmail.com)
+
+---
+
+<p align="center">
+  <em>Repositorio creado con fines de portafolio. El código de producción de PitchPilot AI es privado.</em><br />
+  <strong>© 2026 PitchPilot AI. Todos los derechos reservados.</strong>
+</p>
