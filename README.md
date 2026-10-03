@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="https://donatohernandez.dev">Portafolio</a>
+  <a href="https://mx.donatohernandez.dev">Portafolio</a>
 </p>
 
 ---
@@ -309,7 +309,7 @@ Para evolucionarlo hacia una plataforma comercial completa, las siguientes etapa
 
 Si deseas conocer más sobre la arquitectura de voz, la integración con Gemini Live o las decisiones técnicas del proyecto:
 
-- **Portafolio:** [donatohernandez.dev](https://donatohernandez.dev)
+- **Portafolio:** [mx.donatohernandez.dev](https://mx.donatohernandez.dev)
 - **LinkedIn:** [manuel-donato-hernandez](https://www.linkedin.com/in/manuel-donato-hernandez/)
 - **GitHub:** [@Donatohernandez](https://github.com/Donatohernandez)
 - **Correo:** [manueldonato9921@gmail.com](mailto:manueldonato9921@gmail.com)
